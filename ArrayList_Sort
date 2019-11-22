@@ -1,0 +1,91 @@
+import java.util.*;
+
+class Student{
+	private int id;
+	private String fname;
+	private double cgpa;
+	public Student(int id, String fname, double cgpa) {
+		super();
+		this.id = id;
+		this.fname = fname;
+		this.cgpa = cgpa;
+	}
+	public int getId() {
+		return id;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public double getCgpa() {
+		return cgpa;
+	}
+    public String toString(){
+        return id+" "+fname+" "+cgpa;
+    }
+}
+
+//Complete the code
+public class Solution
+{
+	public static void main(String[] args){
+		Scanner in = new Scanner(System.in);
+		int testCases = Integer.parseInt(in.nextLine());
+		
+		List<Student> studentList = new ArrayList<Student>();
+		while(testCases>0){
+			int id = in.nextInt();
+			String fname = in.next();
+			double cgpa = in.nextDouble();
+			
+			Student st = new Student(id, fname, cgpa);
+			studentList.add(st);
+			
+			testCases--;
+		}
+
+        for(int i=0;i<studentList.size()-1;i++){
+            for(int j=0;j<studentList.size()-1;j++){
+                if(studentList.get(j).getCgpa() < studentList.get(j+1).getCgpa()){
+                    Student s = new Student(studentList.get(j+1).getId(),studentList.get(j+1).getFname(),studentList.get(j+1).getCgpa());
+                    studentList.remove(j+1);
+                    studentList.add(j,s);
+                }
+                else if(studentList.get(j).getCgpa() == studentList.get(j+1).getCgpa()){
+                    if(studentList.get(j).getFname().compareTo(studentList.get(j+1).getFname())>0){
+                        Student s = new Student(studentList.get(j+1).getId(),studentList.get(j+1).getFname(),studentList.get(j+1).getCgpa());
+                    studentList.remove(j+1);
+                    studentList.add(j,s);
+                    }
+                    else if(studentList.get(j).getFname().compareTo(studentList.get(j+1).getFname())== 0){
+                        if(studentList.get(j).getId() > studentList.get(j+1).getId()){
+                    Student s = new Student(studentList.get(j+1).getId(),studentList.get(j+1).getFname(),studentList.get(j+1).getCgpa());
+                    studentList.remove(j+1);
+                    studentList.add(j,s);
+                    }
+                    else{
+                        continue;
+                    }
+                    }
+                    else{
+                        continue;
+                    }
+                }
+            }
+        }
+        
+
+        for(int i=0;i<studentList.size();i++){
+            if(i == studentList.size()-1)
+            {
+                System.out.print(studentList.get(i).getFname());
+            }
+            else{
+                System.out.println(studentList.get(i).getFname());
+            }
+        }
+      	
+	}
+}
+
+
+
