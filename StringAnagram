@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+public class Solution {
+
+    static boolean isAnagram(String a, String b) {
+        if(a.length() != b.length()){
+            return false;
+        }
+        StringBuilder sb1 = new StringBuilder(a.toLowerCase());
+        StringBuilder sb2 = new StringBuilder(b.toLowerCase());
+        StringBuilder a1 = new StringBuilder();
+        StringBuilder b1 = new StringBuilder();
+        int count = 1;
+        for(int i=0;i<sb1.length();i++){
+            count = 1;
+            char ch1 = sb1.charAt(i);
+            if(ch1 == '0'){
+                continue;
+            }
+            for(int j=i+1;j<sb1.length();j++){
+                if(sb1.charAt(j) == '0'){
+                    continue;
+                }
+                else if(ch1 == sb1.charAt(j)){
+                    count++;
+                    sb1.setCharAt(j,'0');
+                }
+            }
+            a1.append(ch1);
+            char ch = ((char)(count+48));
+            a1.append(ch);
+        }
+        count = 1;
+        for(int i=0;i<sb2.length();i++){
+            count = 1;
+            char ch1 = sb2.charAt(i);
+            if(ch1 == '0'){
+                continue;
+            }
+            for(int j=i+1;j<sb2.length();j++){
+                if(sb2.charAt(j) == '0'){
+                    continue;
+                }
+                else if(ch1 == sb2.charAt(j)){
+                    count++;
+                    sb2.setCharAt(j,'0');
+                }
+            }
+            b1.append(ch1);
+            char ch = ((char)(count+48));
+            b1.append(ch);
+        }
+        for(int i=0;i<a1.length();i+=2){
+            char ch = a1.charAt(i);
+            String s=String.valueOf(ch);
+            char f = a1.charAt(i+1);
+            int idx = b1.indexOf(s);
+            if(idx == -1){
+                return false;
+            }
+            else{
+                if(b1.charAt(idx+1) != f){
+                    return false;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        return true;
+    }
+
+  public static void main(String[] args) {
+    
+        Scanner scan = new Scanner(System.in);
+        String a = scan.next();
+        String b = scan.next();
+        scan.close();
+        boolean ret = isAnagram(a, b);
+        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
+    }
+}
