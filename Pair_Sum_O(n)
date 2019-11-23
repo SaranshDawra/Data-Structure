@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class PairSum_On {
+
+	public static void main(String[] args) {
+		
+		Scanner scn = new Scanner(System.in);
+		int n=scn.nextInt();
+		int arr[] = new int[n];
+		Map<Integer,Integer> map = new HashMap<>();
+		for(int i=0;i<n;i++) {
+			arr[i] = scn.nextInt();
+			map.put(arr[i], i);
+		}
+		int sum = scn.nextInt();
+		
+		for(int i=0;i<arr.length;i++) {
+			int num = sum - arr[i];
+			if(map.containsKey(num)) {
+				System.out.println("Indexes are: "+map.get(arr[i])+" and "+map.get(num));
+				break;
+			}
+		}
+		
+
+	}
+
+}
